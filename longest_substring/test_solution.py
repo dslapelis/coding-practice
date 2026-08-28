@@ -55,6 +55,12 @@ def test_repeat_outside_the_current_window(s, expected):
     assert length_of(s) == expected
 
 
+@pytest.mark.parametrize("s, expected", [("tmmzuxtt", 5), ("abbaa", 2), ("abcbaa", 3)])
+def test_repeat_after_a_stale_repeat(s, expected):
+    """A character goes stale, then repeats again — its position must have been updated."""
+    assert length_of(s) == expected
+
+
 def test_spaces_digits_and_symbols():
     assert length_of("a b!c#1 2") == 7
     assert length_of("   ") == 1

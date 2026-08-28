@@ -36,17 +36,12 @@ class Solution:
 
         left = 0
         for index, value in enumerate(s):
-            # breakpoint()
-            if seen_char.get(value) is None:
-                seen_char[value] = index
-                longest = max(index - left + 1, longest)
-            else:
-                if seen_char[value] < left:
-                    longest = max(index - left + 1, longest)
-                    continue
-                left = seen_char[value] + 1
-                seen_char[value] = index
-                longest = max(index - left + 1, longest)
+            prev = seen_char.get(value)
+            if prev is not None and prev >= left:
+                left = prev + 1
+
+            seen_char[value] = index
+            longest = max(index - left + 1, longest)
         return longest
 
 
