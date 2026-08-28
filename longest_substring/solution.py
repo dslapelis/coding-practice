@@ -34,29 +34,19 @@ class Solution:
         # recording the chars we have seen this turn
         seen_char: dict[str, int] = {}
 
-        # iterate through the string, from every char in the string
-        for i in range(len(s)):
-            curr_char = s[i]
-            curr_longest = 1
-            seen_char[curr_char] = 1
-
-            for j in s[i+1:]:
-                # if we havent yet seen the next char, add it to dict and bump curr_longest
-                if seen_char.get(j) is None:
-                    seen_char[j] = 1
-                    curr_longest += 1
-                else:
-                    # if we have seen the next char, check if our current longest is > 
-                    # total longest, reset seen_char, and reset curr_longest
-                    longest = max(longest, curr_longest)
-                    seen_char = {}
-                    curr_longest = 0
-                    break
-            # if we get through all of the rest of the string without resetting, record 
-            # longest and reset seen_char
-            longest = max(longest, curr_longest)
-            seen_char = {}
-
+        left = 0
+        for index, value in enumerate(s):
+            # breakpoint()
+            if seen_char.get(value) is None:
+                seen_char[value] = index
+                longest = max(index - left + 1, longest)
+            else:
+                if seen_char[value] < left:
+                    longest = max(index - left + 1, longest)
+                    continue
+                left = seen_char[value] + 1
+                seen_char[value] = index
+                longest = max(index - left + 1, longest)
         return longest
 
 
