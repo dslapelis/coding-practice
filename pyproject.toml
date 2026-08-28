@@ -1,0 +1,15 @@
+[project]
+name = "training"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+# Each problem is a package (dir with __init__.py), so test file names may repeat
+# across problems without colliding. Bare `pytest` grades every problem in the repo.
+testpaths = ["."]
