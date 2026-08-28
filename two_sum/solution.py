@@ -53,7 +53,7 @@ class Solution:
             if indices is not None:
                     return [indi, indices[0]]
             
-            if vali in seen.keys():
+            if vali in seen:
                 if indi not in seen[vali]:
                     seen[vali].append(indi)
             else:
