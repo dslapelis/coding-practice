@@ -35,31 +35,18 @@ from typing import Optional
 
 
 class Solution:
-    # seen is a dict keyed on value, and its values are a list of indices
-    seen = {}
-    
     def twoSum(self, nums: list[int], target: int) -> list[int]:
-        seen = {}
+        seen: dict[int, int] = {}
         
         for indi, vali in enumerate(nums):
             valj = target - vali
-            indices = None
-            
-            try:
-                indices = seen[valj]
-            except KeyError:
-                pass
 
-            if indices is not None:
-                    return [indi, indices[0]]
-            
-            if vali in seen:
-                if indi not in seen[vali]:
-                    seen[vali].append(indi)
-            else:
-                seen[vali] = [indi]
+            if valj in seen:
+                return [indi, seen[valj]]
 
+            seen[vali] = indi
 
+        return []
 
 if __name__ == "__main__":
     solution = Solution()
